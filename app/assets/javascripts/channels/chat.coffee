@@ -6,7 +6,9 @@ App.chat = App.cable.subscriptions.create "ChatChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    console.log(data)
+    li = document.createElement('li')
+    li.textContent = data
+    document.getElementById('message-list').appendChild(li)
 
-  put_message: () ->
-    @perform('put_message')
+  put_message: (msg) ->
+    @perform('put_message', { data: msg })
